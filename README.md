@@ -88,7 +88,7 @@ Observations:
 * Uncovered microphone: approximately 3000–3500 ADC counts.
 
 Next Steps:
-
+* Solder Header to MAX9814
 * Characterise ambient noise levels.
 * Investigate response to speech and impulse sounds.
 * Develop sound detection algorithms.
