@@ -76,30 +76,63 @@ Lessons Learned:
 
 ---
 
-### Phase 2 – Microphone Characterisation (In Progress)
+### Phase 2 – Microphone Characterisation and Sound Detection (In Progress)
 
 Objectives:
 
-* Connect and test the MAX9814 microphone.
-* Understand sensor output behaviour.
-* Establish baseline sound measurements.
+* Connect and test the MAX9814 microphone amplifier.
+* Read microphone output using the ESP32 ADC.
+* Understand how the microphone signal changes in quiet and loud conditions.
+* Create a simple sound-detection rule.
 
 Current Status:
 
 * ESP32 configured for microphone testing.
-* CP2102 USB driver installed and configured.
-* Initial ADC measurements collected.
+* MAX9814 connected to GPIO32 on the ESP32.
+* Raw ADC readings confirmed to change with sound.
+* Simple averaging was tested but did not clearly show sound strength.
+* A min/max sampling method was implemented to measure signal variation.
+* A first sound-detection threshold has been tested.
 
-Observations:
+Method:
 
-* Covered microphone: approximately hundreds of ADC counts.
-* Uncovered microphone: approximately 3000–3500 ADC counts.
+Instead of using the average ADC value, the program records the lowest and highest microphone readings over a short sampling window.
+
+```text
+sound level = highest reading - lowest reading
+```
+
+Measured Results:
+
+| Test condition           | Approximate sound level |
+| ------------------------ | ----------------------: |
+| Quiet room               |                450–1050 |
+| Speaking near microphone |              Below 2000 |
+| Clap                     |               2000–3000 |
+| Tap near microphone      |               2000–3000 |
+
+A temporary threshold of 1500 was selected for early testing.
+
+Current behaviour:
+
+```text
+if sound level > 1500:
+    sound detected
+else:
+    no sound
+```
+
+Completed:
+* Soldered header pins to the MAX9814 microphone module.
+* Connected the MAX9814 output to ESP32 GPIO32.
+* Confirmed that raw ADC readings change with sound.
+* Tested a min/max sampling method to estimate sound activity.
+* Implemented a first threshold-based sound detection test.
 
 Next Steps:
-* Solder Header to MAX9814
-* Characterise ambient noise levels.
-* Investigate response to speech and impulse sounds.
-* Develop sound detection algorithms.
+* Repeat microphone testing with the soldered header connection.
+* Test different threshold values in different environments.
+* Improve the sound-detection logic before moving to direction finding.
 
 ---
 
