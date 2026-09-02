@@ -8,6 +8,14 @@ The project is being developed incrementally, with each subsystem tested indepen
 
 ---
 
+## Current Prototype
+
+![Current setup](images/current-setup.jpg)
+
+The current prototype is being used to test the microphone and power system before the full drive system is added.
+
+---
+
 ## Objectives
 
 * Detect and analyse sound using microphones.
