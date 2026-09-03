@@ -2,6 +2,7 @@ const int threshold = 1500;                                    //Threshold for d
 const int micPin = 32;                                         // Microphone pin
 bool soundDetected = false;                                    // Stores whether sound is currently detected
 const unsigned long sampleWindow = 50;                                   
+int soundLevel;
 
 void setup() {
   pinMode(micPin, INPUT);
@@ -9,8 +10,7 @@ void setup() {
   
 }
 
-void loop() {
-  int soundLevel;
+int measureSoundLevel(){
   int lowest = 4095;                                           // Lowest ADC value in the current sample window
   int highest = 0;                                             // Highest ADC value in the current sample window
   unsigned long startTime = millis();                          // Start time for this sample window
@@ -23,14 +23,13 @@ void loop() {
       highest = value;
     }
   }
-  soundLevel = highest - lowest;
-  if (soundLevel > threshold){
-    soundDetected = true;
-  }
-  else{
-    soundDetected = false;
-  }
+  return (highest - lowest);
+  
+}
 
+void loop() {
+   soundLevel = measureSoundLevel();
+  soundDetected = soundLevel > threshold;
   if (soundDetected){
     Serial.println(String("Sound level: ") + soundLevel + " - Sound Detected");
   }
