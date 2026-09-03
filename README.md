@@ -106,10 +106,10 @@ Measured Results:
 
 | Test condition           | Approximate sound level |
 | ------------------------ | ----------------------: |
-| Quiet room               |                450–1050 |
-| Speaking near microphone |              Below 2000 |
-| Clap                     |               2000–3000 |
-| Tap near microphone      |               2000–3000 |
+| Quiet room               |                450–800  |
+| Speaking near microphone |                1500+    |
+| Clap                     |               2500+ |
+| Tap near microphone      |               1800+ |
 
 A temporary threshold of 1500 was selected for early testing.
 
