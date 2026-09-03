@@ -93,6 +93,11 @@ Current Status:
 * Simple averaging was tested but did not clearly show sound strength.
 * A min/max sampling method was implemented to measure signal variation.
 * A first sound-detection threshold has been tested.
+* A min/max sampling method is now being used to estimate sound activity.
+* A temporary threshold of 1500 has been selected for basic sound detection.
+* Quiet-room readings are typically around 400–800.
+* Speech, claps and taps produce readings above the threshold.
+* No false triggers were observed during quiet testing.
 
 Method:
 
@@ -130,9 +135,9 @@ Completed:
 * Implemented a first threshold-based sound detection test.
 
 Next Steps:
-* Repeat microphone testing with the soldered header connection.
-* Test different threshold values in different environments.
-* Improve the sound-detection logic before moving to direction finding.
+* Refine the detection logic if false triggers appear later.
+* Convert the sound detection result into a variable that can be used by the robot control logic.
+* Begin preparing for direction finding.
 
 ---
 
