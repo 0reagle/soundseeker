@@ -1,11 +1,3 @@
-/*
-  Microphone threshold test
-
-  Reads the MAX9814 microphone using ESP32 GPIO32.
-  Measures sound level using highest - lowest ADC value over 50 ms.
-  Prints whether sound is detected based on a threshold of 1500.
-*/
-
 void setup() {
   pinMode(32, INPUT);
   Serial.begin(115200);
@@ -28,10 +20,10 @@ void loop() {
   }
   soundLevel = highest-lowest;
   if (soundLevel > 1500){
-    Serial.println("Sound Detected");
+    Serial.println(String("Sound level: ") + soundLevel + " - Sound Detected");
   }
   else{
-    Serial.println("No Sound");
+    Serial.println(String("Sound level: ") + soundLevel + " - No Sound");
   }
   delay(100);
 }
