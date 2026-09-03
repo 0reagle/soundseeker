@@ -1,6 +1,6 @@
-const int threshold = 1500;                                    //Threshold for detecting Sound
+const int threshold = 1500;                                    //Threshold for detecting sound
 const int micPin = 32;                                         // Microphone pin
-bool soundDetected = false;                                    //Sound Detection
+bool soundDetected = false;                                    // Stores whether sound is currently detected
 const unsigned long sampleWindow = 50;                                   
 
 void setup() {
@@ -11,9 +11,9 @@ void setup() {
 
 void loop() {
   int soundLevel;
-  int lowest = 4095;                                           //Lowest Value currently read
-  int highest = 0;                                             //Highest Value currently read
-  unsigned long startTime = millis();                          //Gets the current time since the board began to run
+  int lowest = 4095;                                           // Lowest ADC value in the current sample window
+  int highest = 0;                                             // Highest ADC value in the current sample window
+  unsigned long startTime = millis();                          // Start time for this sample window
   while (millis() - startTime < sampleWindow){                 //Collect readings for 50 ms and track the lowest and highest values
     int value = analogRead(micPin);
     if (value < lowest){
@@ -23,7 +23,7 @@ void loop() {
       highest = value;
     }
   }
-  soundLevel = highest-lowest;
+  soundLevel = highest - lowest;
   if (soundLevel > threshold){
     soundDetected = true;
   }
