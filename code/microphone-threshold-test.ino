@@ -1,5 +1,8 @@
+int threshold = 1500;
+int micPin = 32;
+
 void setup() {
-  pinMode(32, INPUT);
+  pinMode(micPin, INPUT);
   Serial.begin(115200);
   
 }
@@ -10,7 +13,7 @@ void loop() {
   int highest = 0;
   unsigned long startTime = millis();
   while (millis() - startTime < 50){
-    int value = analogRead(32);
+    int value = analogRead(micPin);
     if (value < lowest){
       lowest = value;
     }
@@ -19,7 +22,7 @@ void loop() {
     }
   }
   soundLevel = highest-lowest;
-  if (soundLevel > 1500){
+  if (soundLevel > threshold){
     Serial.println(String("Sound level: ") + soundLevel + " - Sound Detected");
   }
   else{
