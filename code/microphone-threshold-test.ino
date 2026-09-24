@@ -1,6 +1,9 @@
 const int threshold = 1500;                                    // Threshold for detecting sound
 const int micPin = 32;                                         // Microphone pin
+
 bool soundDetected = false;                                    // Stores whether sound is currently detected
+bool previousSoundDetected = false;                            // Stores whether sound is was detected
+
 const unsigned long sampleWindow = 50;                                   
 int soundLevel;
 
@@ -27,8 +30,11 @@ int measureSoundLevel(){
   
 }
 
-void printSoundStatus(int level, bool detected){
-  if (detected){
+void printSoundStatus(int level, bool detected, bool newEvent){
+  if (newEvent){
+    Serial.println(String("Sound level: ") + level + " - New Sound");
+  }
+  else if (detected){
     Serial.println(String("Sound level: ") + level + " - Sound Detected");
   }
   else{
@@ -39,6 +45,8 @@ void printSoundStatus(int level, bool detected){
 void loop() {
   soundLevel = measureSoundLevel();
   soundDetected = soundLevel > threshold;
-  printSoundStatus(soundLevel, soundDetected);
+  bool newSoundEvent = soundDetected && !previousSoundDetected;
+  printSoundStatus(soundLevel, soundDetected, newSoundEvent);
+  previousSoundDetected = soundDetected;
   delay(100);                                                                     //Short delay to make the serial output easier to read
 }
